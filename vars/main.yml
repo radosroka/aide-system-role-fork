@@ -5,9 +5,10 @@
 # value in a platform/version specific file in vars/
 
 # Examples of non-distribution specific (generic) internal variables:
-__aide_foo_config: foo.conf
-__aide_packages: []
-__aide_services: []
+__aide_config: aide.conf
+__aide_packages: ['aide']
+__aide_db_name: /var/lib/aide/aide.db.gz
+__aide_db_new_name: /var/lib/aide/aide.db.new.gz
 # ansible_facts required by the role
 __aide_required_facts:
   - distribution
@@ -35,5 +36,6 @@ __aide_rh_distros_fedora: "{{ __aide_rh_distros + ['Fedora'] }}"
 __aide_is_rh_distro: "{{ ansible_distribution in __aide_rh_distros }}"
 
 # Use this in conditionals to check if distro is Red Hat or clone, or Fedora
-__aide_is_rh_distro_fedora: "{{ ansible_distribution in __aide_rh_distros_fedora }}"
+__aide_is_rh_distro_fedora: \
+  "{{ ansible_distribution in __aide_rh_distros_fedora }}"
 # END - DO NOT EDIT THIS BLOCK - rh distros variables
