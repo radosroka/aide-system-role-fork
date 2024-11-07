@@ -15,6 +15,9 @@ aide_generate_config: false
 # Enable initialization of the database phase
 aide_init: false
 
+# Fetch db
+aide_fetch_db: false
+
 # Enable check database phase
 aide_check: false
 

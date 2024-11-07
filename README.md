@@ -63,7 +63,15 @@ Type: `bool`
 
 ### aide_init
 
-Initializes the AIDE database and fetches it from the remote nodes to store it on the controller node
+Initializes the AIDE database.
+
+Default: `false`
+
+Type: `bool`
+
+### aide_fetch_db
+
+Fetches database from the remote nodes to store it on the controller node
 
 Default: `false`
 

@@ -9,7 +9,8 @@
         aide_install: true
         aide_generate_config: true
         aide_init: true
-        aide_check: false
-        aide_update: false
+        aide_fetch_db: true
+        aide_check: true
+        aide_update: true
       ansible.builtin.include_role:
         name: linux-system-roles.aide
