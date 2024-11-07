@@ -10,9 +10,8 @@
     state: present
     use: "{{ (__aide_is_ostree | d(false)) |
              ternary('ansible.posix.rhel_rpm_ostree', omit) }}"
-  tags:
-    - never
-    - install
+  when:
+    - aide_install
 
 - name: Ensure required services are enabled and started
   ansible.builtin.service:
@@ -20,8 +19,6 @@
     state: started
     enabled: true
   loop: "{{ __aide_services }}"
-  tags:
-    - never
 
 - name: Generate "/etc/{{ __aide_config }}"
   ansible.builtin.template:
@@ -29,15 +26,12 @@
     dest: "/etc/{{ __aide_config }}"
     backup: true
     mode: "0400"
-  tags:
-    - never
-    - generate_config
+  when:
+    - aide_generate_config
 
 - name: Initialize AIDE database and fetch it
-  become: true
-  tags:
-    - never
-    - init
+  when:
+    - aide_init
   block:
     - name: Initialize AIDE database
       ansible.builtin.command:
@@ -55,10 +49,8 @@
         state: absent
 
 - name: Check AIDE integrity
-  become: true
-  tags:
-    - never
-    - check
+  when:
+    - aide_check
   block:
     - name: Copy AIDE reference database to remote
       ansible.builtin.copy:
@@ -76,10 +68,8 @@
       changed_when: true
 
 - name: Update AIDE database and fetch it
-  become: true
-  tags:
-    - never
-    - update
+  when:
+    - aide_update
   block:
     - name: Update AIDE database
       ansible.builtin.command:

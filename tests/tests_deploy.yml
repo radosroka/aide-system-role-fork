@@ -4,10 +4,14 @@
   hosts: all
   gather_facts: false  # test that role works in this case
   roles:
-    - linux-system-roles.aide
+    - role: linux-system-roles.aide
+      vars:
+        aide_install: true
+        aide_generate_config: true
+        aide_init: true
   tasks:
     - name: Check header for ansible_managed, fingerprint
-      include_tasks: tasks/check_not_present_header.yml
+      include_tasks: tasks/check_header.yml
       vars:
         __file: /etc/aide.conf
         __fingerprint: system_role:aide

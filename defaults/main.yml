@@ -5,3 +5,18 @@
 
 # Examples of role input variables:
 aide_db_fetch_dir: files
+
+# Enable install phase
+aide_install: false
+
+# Enable config file generation phase
+aide_generate_config: false
+
+# Enable initialization of the database phase
+aide_init: false
+
+# Enable check database phase
+aide_check: false
+
+# Enable database update phase
+aide_update: false

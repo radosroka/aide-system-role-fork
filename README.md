@@ -18,17 +18,11 @@ extreme caution as it might break your system.
 
 ## How does the role do that?
 
-* The role is controlled by using [Ansible Tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html)
-* If you run the playbook without specifying any tag the role will change nothing on your remote nodes
-* To execute some supported use cases you need to explicitly specify one or more of the following tags
+* The role is controlled by using role variables
+* If you run the playbook without specifying any role variable the role will change nothing on your remote nodes
+* To execute some supported use cases you need to explicitly specify one or more of the following variables
 
 ### Available tags to control and use the role
-
-* __install__ - With this tag the role ensures that the `aide` package is installed on the remote nodes
-* __generate_config__ - Generates the file `/etc/aide.conf` using `templates/aide.conf.j2`; the template needs to be adjusted to fit your requirements; if you do not use this tag the default configuration file shipped with the `aide` package will be used
-* __init__ - Initializes the AIDE database and fetches it from the remote nodes to store it on the controller node
-* __check__ - Runs an integrity check on the remote nodes
-* __update__ - Updates the AIDE database and stores it on the controller node
 
 ## What does this role not do for you?
 
@@ -51,11 +45,45 @@ same directory as the playbook.
 In case you like to store the fetched AIDE database files somewhere else you
 need to specify a different path here.
 
-Example of setting the variables:
+### aide_install
 
-```yaml
-aide_db_fetch_dir: files
-```
+With this variable the role ensures that the `aide` package is installed on the remote nodes
+
+Default: `false`
+
+Type: `bool`
+
+### aide_generate_config
+
+Generates the file `/etc/aide.conf` using `templates/aide.conf.j2`; the template needs to be adjusted to fit your requirements; if you do not use this varable the default configuration file shipped with the `aide` package will be used.
+
+Default: `false`
+
+Type: `bool`
+
+### aide_init
+
+Initializes the AIDE database and fetches it from the remote nodes to store it on the controller node
+
+Default: `false`
+
+Type: `bool`
+
+### aide_check
+
+Runs an integrity check on the remote nodes
+
+Default: `false`
+
+Type: `bool`
+
+### aide_update
+
+Updates the AIDE database and stores it on the controller node
+
+Default: `false`
+
+Type: `bool`
 
 ## Example Playbook
 
@@ -69,16 +97,15 @@ passed in as parameters) is always nice for users too:
   hosts: targets
   tasks:
     - name: Include role aide
-      tags:
-        - install
-        - generate_config
-        - init
-        - check
-        - update
       vars:
         aide_db_fetch_dir: files
+        aide_install: true
+        aide_generate_config: true
+        aide_init: true
+        aide_check: false
+        aide_update: false
       ansible.builtin.include_role:
-        name: aide
+        name: linux-system-roles.aide
 ```
 
 More examples can be found in the [`examples/`](examples) directory.
