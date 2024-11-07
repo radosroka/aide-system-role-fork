@@ -42,6 +42,7 @@
     - name: Initialize AIDE database
       ansible.builtin.command:
         cmd: aide --init
+      changed_when: true
 
     - name: Fetch AIDE database
       ansible.builtin.fetch:
@@ -72,7 +73,7 @@
     - name: Check against AIDE reference database
       ansible.builtin.command:
         cmd: aide --check
-      changed_when: false
+      changed_when: true
 
 - name: Update AIDE database and fetch it
   become: true
@@ -85,6 +86,7 @@
         cmd: aide --update
       register: __aide_update_result
       failed_when: __aide_update_result.rc > 7
+      changed_when: true
 
     - name: Fetch AIDE database
       ansible.builtin.fetch:
