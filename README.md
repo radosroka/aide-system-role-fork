@@ -35,6 +35,21 @@ only.
 
 ## Role Variables
 
+### aide_custom_template
+
+This variable takes a string to specify a path where the custom template for aide.conf is located.
+
+To be sure that everething is correct, template needs to start with following snippet:
+
+``` jinja
+{{ ansible_managed | comment }}
+{{ "system_role:aide" | comment(prefix="", postfix="") }}
+```
+
+Default: `null`
+
+Type: `string`
+
 ### aide_db_fetch_dir
 
 This variable takes a string to specify the directory on the Ansible Control
@@ -45,17 +60,13 @@ same directory as the playbook.
 In case you like to store the fetched AIDE database files somewhere else you
 need to specify a different path here.
 
+Default: `files`
+
+Type: `string
+
 ### aide_install
 
 With this variable the role ensures that the `aide` package is installed on the remote nodes
-
-Default: `false`
-
-Type: `bool`
-
-### aide_generate_config
-
-Generates the file `/etc/aide.conf` using `templates/aide.conf.j2`; the template needs to be adjusted to fit your requirements; if you do not use this varable the default configuration file shipped with the `aide` package will be used.
 
 Default: `false`
 

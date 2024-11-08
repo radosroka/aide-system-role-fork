@@ -22,12 +22,15 @@
 
 - name: Generate "/etc/{{ __aide_config }}"
   ansible.builtin.template:
-    src: "{{ __aide_config }}.j2"
+#    remote_src: true
+    src: "{{ aide_custom_template }}"
     dest: "/etc/{{ __aide_config }}"
-    backup: true
     mode: "0400"
   when:
-    - aide_generate_config
+    - aide_custom_template
+
+#- name: Print Header
+#  ansible.builtin.shell: head /etc/aide.conf || true
 
 - name: Initialize AIDE database
   when:

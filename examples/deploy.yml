@@ -7,10 +7,9 @@
       vars:
         aide_db_fetch_dir: files
         aide_install: true
-        aide_generate_config: true
         aide_init: true
-        aide_fetch_db: true
-        aide_check: true
-        aide_update: true
+        aide_fetch_db: false
+        aide_check: false
+        aide_update: false
       ansible.builtin.include_role:
         name: linux-system-roles.aide
