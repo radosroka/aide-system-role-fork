@@ -29,8 +29,8 @@
   when:
     - aide_custom_template
 
-#- name: Print Header
-#  ansible.builtin.shell: head /etc/aide.conf || true
+# - name: Print Header
+#   ansible.builtin.shell: head /etc/aide.conf || true
 
 - name: Initialize AIDE database
   when:
@@ -44,12 +44,12 @@
     - name: Copy AIDE reference database
       ansible.builtin.copy:
         remote_src: true
-        src:  "{{ __aide_db_new_name }}"
+        src: "{{ __aide_db_new_name }}"
         dest: "{{ __aide_db_name }}"
         owner: root
         group: root
         mode: "0440"
-        force: yes
+        force: true
       when:
         - not aide_fetch_db
 
