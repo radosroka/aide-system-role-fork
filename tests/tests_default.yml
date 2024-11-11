@@ -16,5 +16,11 @@
         - name: Assert that the file exists
           ansible.builtin.assert:
             that:
-              - not file_check.stat.exists
-            fail_msg: "The file does exist."
+              - file_check.stat.exists
+            fail_msg: "The file does not exist."
+
+        - name: Check header for not present ansible_managed, fingerprint
+          include_tasks: tasks/check_not_present_header.yml
+          vars:
+            __file: /etc/aide.conf
+            __fingerprint: system_role:aide

@@ -6,7 +6,6 @@
   roles:
     - role: linux-system-roles.aide
       vars:
-        aide_install: true
         aide_init: true
   tasks:
     - name: Check header for ansible_managed, fingerprint

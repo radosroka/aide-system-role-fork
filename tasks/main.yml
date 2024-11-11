@@ -10,8 +10,6 @@
     state: present
     use: "{{ (__aide_is_ostree | d(false)) |
              ternary('ansible.posix.rhel_rpm_ostree', omit) }}"
-  when:
-    - aide_install | bool
 
 - name: Ensure required services are enabled and started
   ansible.builtin.service:

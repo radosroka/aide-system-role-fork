@@ -55,14 +55,6 @@ Default: `files`
 
 Type: `string
 
-### aide_install
-
-With this variable the role ensures that the `aide` package is installed on the remote nodes
-
-Default: `false`
-
-Type: `bool`
-
 ### aide_init
 
 Initializes the AIDE database.

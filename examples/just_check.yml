@@ -6,7 +6,6 @@
     - name: Include role aide
       vars:
         aide_db_fetch_dir: files
-        aide_install: false
         aide_init: false
         aide_fetch_db: false
         aide_check: true

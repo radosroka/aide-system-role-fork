@@ -9,9 +9,6 @@ aide_db_template: null
 # Examples of role input variables:
 aide_db_fetch_dir: files
 
-# Enable install phase
-aide_install: false
-
 # Enable initialization of the database phase
 aide_init: false
 
