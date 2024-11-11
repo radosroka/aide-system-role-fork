@@ -13,8 +13,6 @@ This is an ansible role that installs and configures the [Advanced Intrusion Det
 * It runs AIDE integrity checks on the remote nodes
 * It updates the AIDE databases and stores them on the controller node
 
-### Available tags to control and use the role
-
 ## What does this role not do for you?
 
 * It does not explain how to create a good AIDE configuration that suits your requirements; that task remains for you to accomplish
