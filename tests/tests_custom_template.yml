@@ -6,7 +6,7 @@
   roles:
     - role: linux-system-roles.aide
       vars:
-        aide_custom_template: files/aide-custom.conf.j2
+        aide_db_template: files/aide-custom.conf.j2
         aide_install: true
         aide_init: true
   tasks:

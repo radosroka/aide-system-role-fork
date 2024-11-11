@@ -4,9 +4,6 @@
 
 This is an ansible role that installs and configures the [Advanced Intrusion Detection Environment (AIDE)](https://aide.github.io). For Day 2 tasks it can run integrity checks and update the AIDE database.
 
-_Notice:_ This is a very early stage of a work in progress. Please use with
-extreme caution as it might break your system.
-
 ## What does this role do for you?
 
 * It ensures that the `aide` package is installed on the remote nodes
@@ -15,12 +12,6 @@ extreme caution as it might break your system.
 * The AIDE databases from the remote nodes are stored in a central directory on the controller node
 * It runs AIDE integrity checks on the remote nodes
 * It updates the AIDE databases and stores them on the controller node
-
-## How does the role do that?
-
-* The role is controlled by using role variables
-* If you run the playbook without specifying any role variable the role will change nothing on your remote nodes
-* To execute some supported use cases you need to explicitly specify one or more of the following variables
 
 ### Available tags to control and use the role
 
@@ -35,7 +26,7 @@ only.
 
 ## Role Variables
 
-### aide_custom_template
+### aide_db_template
 
 This variable takes a string to specify a path where the custom template for aide.conf is located.
 

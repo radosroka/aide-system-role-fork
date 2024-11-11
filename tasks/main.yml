@@ -11,7 +11,7 @@
     use: "{{ (__aide_is_ostree | d(false)) |
              ternary('ansible.posix.rhel_rpm_ostree', omit) }}"
   when:
-    - aide_install
+    - aide_install | bool
 
 - name: Ensure required services are enabled and started
   ansible.builtin.service:
@@ -22,19 +22,20 @@
 
 - name: Generate "/etc/{{ __aide_config }}"
   ansible.builtin.template:
-#    remote_src: true
-    src: "{{ aide_custom_template }}"
+    src: "{{ aide_db_template }}"
     dest: "/etc/{{ __aide_config }}"
     mode: "0400"
   when:
-    - aide_custom_template
+    - aide_db_template is defined
+    - aide_db_template is not none
+    - aide_db_template is string
 
 # - name: Print Header
 #   ansible.builtin.shell: head /etc/aide.conf || true
 
 - name: Initialize AIDE database
   when:
-    - aide_init
+    - aide_init | bool
   block:
     - name: Initialize AIDE database
       ansible.builtin.command:
@@ -51,18 +52,18 @@
         mode: "0440"
         force: true
       when:
-        - not aide_fetch_db
+        - not aide_fetch_db | bool
 
     - name: Remove remote AIDE database file
       ansible.builtin.file:
         path: "{{ __aide_db_new_name }}"
         state: absent
       when:
-        - not aide_fetch_db
+        - not aide_fetch_db | bool
 
 - name: Fetch AIDE database
   when:
-    - aide_fetch_db
+    - aide_fetch_db | bool
   block:
     - name: Fetch AIDE database
       ansible.builtin.fetch:
@@ -76,7 +77,7 @@
 
 - name: Check AIDE integrity
   when:
-    - aide_check
+    - aide_check | bool
   block:
     - name: Copy AIDE reference database
       ansible.builtin.copy:
@@ -87,7 +88,7 @@
         group: root
         mode: "0440"
       when:
-        - aide_fetch_db
+        - aide_fetch_db | bool
 
     - name: Check against AIDE reference database
       ansible.builtin.command:
@@ -96,7 +97,7 @@
 
 - name: Update AIDE database and fetch it
   when:
-    - aide_update
+    - aide_update | bool
   block:
     - name: Update AIDE database
       ansible.builtin.command:
