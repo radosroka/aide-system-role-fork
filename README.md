@@ -118,3 +118,4 @@ MIT.
 
 * Radovan Sroka
 * Joerg Kastning
+* Based on [Tronde/aide](https://github.com/Tronde/aide) ansible role
