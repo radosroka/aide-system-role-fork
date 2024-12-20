@@ -87,9 +87,10 @@ Type: `bool`
 
 ### aide_cron_check
 
-Set up periodic cron check for aide
+If set to `true`, configures periodic cron check for aide
+If set to `false`, removes the periodic cron check
 
-Default: `false`
+Default: `null`
 
 Type: `bool`
 

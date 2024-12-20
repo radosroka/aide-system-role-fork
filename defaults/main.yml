@@ -22,7 +22,7 @@ aide_check: false
 aide_update: false
 
 # Enable periodic check
-aide_cron_check: false
+aide_cron_check: null
 
 # Example of job definition:
 # .---------------- minute (0 - 59)
