@@ -10,5 +10,6 @@
         aide_fetch_db: false
         aide_check: false
         aide_update: false
+        aide_cron_check: false
       ansible.builtin.include_role:
         name: linux-system-roles.aide

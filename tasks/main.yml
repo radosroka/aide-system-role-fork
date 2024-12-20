@@ -104,3 +104,17 @@
       ansible.builtin.file:
         path: "{{ __aide_db_new_name }}"
         state: absent
+
+- name: Update aide check cron configuration if necessary
+  ansible.builtin.lineinfile:
+    path: /etc/crontab
+    regexp: "^.* root /usr/sbin/aide --check"
+    line: "{{ aide_cron_interval }} root /usr/sbin/aide --check"
+  when: aide_cron_check | bool
+
+- name: Remove aide check cron configuration if necessary
+  ansible.builtin.lineinfile:
+    path: /etc/crontab
+    state: absent
+    regexp: "^.* root /usr/sbin/aide --check"
+  when: not aide_cron_check | bool
