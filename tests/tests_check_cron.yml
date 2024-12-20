@@ -10,8 +10,8 @@
         aide_cron_check: true
         aide_cron_interval: "0 12 * * *"
   tasks:
-    - name: Print crontab 1
-      ansible.builtin.shell: cat /etc/crontab
+ #   - name: Print crontab 1
+ #     ansible.builtin.command: cat /etc/crontab
 
     - name: Check file content
       ansible.builtin.lineinfile:
@@ -32,8 +32,8 @@
       vars:
         aide_cron_check: false
   tasks:
-    - name: Print crontab 2
-      ansible.builtin.shell: cat /etc/crontab
+#    - name: Print crontab 2
+#      ansible.builtin.command: cat /etc/crontab
 
     - name: Check file content
       ansible.builtin.lineinfile:

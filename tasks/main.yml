@@ -26,7 +26,7 @@
   when: aide_db_template is not none
 
 # - name: Print Header
-#   ansible.builtin.shell: head /etc/aide.conf || true
+#   ansible.builtin.command: head /etc/aide.conf || true
 
 - name: Initialize AIDE database
   when: aide_init | bool
